@@ -4,24 +4,38 @@ using UnityEngine;
 
 public class Cequencer : MonoBehaviour
 {
-    private int _letters = 5;
-    private int _lettersInCequence = 3;
+
+
+    private int Alphabet = 16;
+    private int _lettersOnObject = 6;
+    private int _lettersInSequence = 3;
     public GameObject Cube;
-    public List<int> LettersArray;
+    public List<int> LettersOnBox;
+    public List<int> LettersInSequince;
     private  int _currentLetter=0;
     // Use this for initialization
     void Start()
     {
-        for (int i = 0; i < _lettersInCequence; i++)
+        for (int i = 0; i < _lettersOnObject; i++)
         {
-            LettersArray.Add(Random.Range(1, _letters));
+            int rnd = Random.Range(0, Alphabet);
+            while (LettersOnBox.Contains(rnd))
+            {
+                rnd= Random.Range(0, Alphabet);
+            }
+            LettersOnBox.Add(rnd);
+        }
+        for (int i = 0; i < _lettersInSequence; i++)
+        {
+            LettersInSequince.Add(LettersOnBox[Random.Range(0,LettersOnBox.Count)]);
         }
 
-        for (int i = 0; i < LettersArray.Count; i++)
+
+        for (int i = 0; i < LettersInSequince.Count; i++)
         {
-            Debug.Log(LettersArray[i]);
+            Debug.Log(LettersInSequince[i]);
         }
-        StartCoroutine("Show", LettersArray[_currentLetter]);
+        //StartCoroutine("Show", LettersArray[_currentLetter]);
     }
 
     // Update is called once per frame
@@ -80,11 +94,11 @@ public class Cequencer : MonoBehaviour
         }
         yield return new WaitForSeconds(1);
         _currentLetter += 1;
-        if (_currentLetter >= LettersArray.Count)
+        if (_currentLetter >= LettersInSequince.Count)
         {
             yield return new WaitForSeconds(2);
             _currentLetter = 0;
         }
-        StartCoroutine("Show", LettersArray[_currentLetter ]);
+        StartCoroutine("Show", LettersInSequince[_currentLetter ]);
     }
 }
