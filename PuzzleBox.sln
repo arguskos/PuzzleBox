@@ -1,7 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuzzleBox.CSharp.Plugins", "PuzzleBox.CSharp.Plugins.csproj", "{7226F2A0-852C-F6BD-73FE-6C3DDBB11E7B}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuzzleBox.CSharp", "PuzzleBox.CSharp.csproj", "{6E6CE4B8-2769-F8E1-6114-C676B8E2E7B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuzzleBox.CSharp.Editor.Plugins", "PuzzleBox.CSharp.Editor.Plugins.csproj", "{84393118-3E7C-03A8-851A-5B39515C7C66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuzzleBox.CSharp.Editor", "PuzzleBox.CSharp.Editor.csproj", "{5B17931B-4E68-7D5D-2411-00C0AF81640A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +15,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7226F2A0-852C-F6BD-73FE-6C3DDBB11E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7226F2A0-852C-F6BD-73FE-6C3DDBB11E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7226F2A0-852C-F6BD-73FE-6C3DDBB11E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7226F2A0-852C-F6BD-73FE-6C3DDBB11E7B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E6CE4B8-2769-F8E1-6114-C676B8E2E7B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E6CE4B8-2769-F8E1-6114-C676B8E2E7B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E6CE4B8-2769-F8E1-6114-C676B8E2E7B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E6CE4B8-2769-F8E1-6114-C676B8E2E7B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84393118-3E7C-03A8-851A-5B39515C7C66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84393118-3E7C-03A8-851A-5B39515C7C66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84393118-3E7C-03A8-851A-5B39515C7C66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84393118-3E7C-03A8-851A-5B39515C7C66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B17931B-4E68-7D5D-2411-00C0AF81640A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B17931B-4E68-7D5D-2411-00C0AF81640A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B17931B-4E68-7D5D-2411-00C0AF81640A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B17931B-4E68-7D5D-2411-00C0AF81640A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
