@@ -9,7 +9,7 @@ public class Cequencer : MonoBehaviour
     private int Alphabet = 16;
     private int _lettersOnObject = 6;
     private int _lettersInSequence = 3;
-    public GameObject Cube;
+    private GameObject Cube;
     public GameObject DebugSequence;
     public Material CubeMaterial;
     public List<int> LettersOnBox;
@@ -22,6 +22,8 @@ public class Cequencer : MonoBehaviour
     private float _speed = 20;
     void Start()
     {
+        Cube = GameObject.Find("SignsParent");
+        print(Cube);
         for (int i = 0; i < _lettersOnObject; i++)
         {
             int rnd = Random.Range(0, Alphabet);
