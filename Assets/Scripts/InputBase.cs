@@ -32,6 +32,31 @@ public class InputBase : MonoBehaviour
         obj.GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(x * 0.25f, y * 0.25f));
     }
 
+    private void PreviousLetter()
+    {
+        var obj = UserSequence.transform.GetChild(_currentLetter);
+        _sequence[_currentLetter] = _sequence[_currentLetter]-1;
+
+        if (_sequence[_currentLetter] < 0)
+        {
+            _sequence[_currentLetter] = 16;
+        }
+        Debug.Log(_sequence[_currentLetter]);
+
+        obj.GetComponent<Renderer>().material = Mat;
+
+        obj.GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(Mathf.Floor(_sequence[_currentLetter] / 4) * 0.25f, _sequence[_currentLetter]%4 * 0.25f));
+    }
+    private void NextLetter()
+    {
+        var obj = UserSequence.transform.GetChild(_currentLetter);
+        _sequence[_currentLetter] = _sequence[_currentLetter] + 1;
+        _sequence[_currentLetter] %= 16;
+
+        obj.GetComponent<Renderer>().material = Mat;
+
+        obj.GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(Mathf.Floor(_sequence[_currentLetter] / 4) * 0.25f, _sequence[_currentLetter] % 4 * 0.25f));
+    }
     private void Check()
     {
         bool right = true;
@@ -61,106 +86,30 @@ public class InputBase : MonoBehaviour
         {
             Check();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            _currentLetter = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            _currentLetter = 1;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            _currentLetter = 2;
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            OnButtonPress(0, 0);
-        }
+        
         if (Input.GetKeyDown(KeyCode.W))
+        {
+            NextLetter();
+        }
+        if (Input.GetKeyDown(KeyCode.S))
 
         {
-            OnButtonPress(0, 1);
+            PreviousLetter();
         }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            OnButtonPress(0, 2);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            OnButtonPress(0, 3);
-
-        }
-
         if (Input.GetKeyDown(KeyCode.A))
         {
-            OnButtonPress(1, 0);
-
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            OnButtonPress(1, 1);
+            _currentLetter--;
+            if (_currentLetter < 0)
+                _currentLetter = _sequence.Count-1;
 
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            OnButtonPress(1, 2);
+            _currentLetter++;
+            _currentLetter %= _sequence.Count;
 
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            OnButtonPress(1, 3);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            OnButtonPress(2, 0);
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            OnButtonPress(2, 1);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            OnButtonPress(2, 2);
-
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            OnButtonPress(2, 3);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            OnButtonPress(3, 0);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            OnButtonPress(3, 1);
-
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            OnButtonPress(3, 2);
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            OnButtonPress(3, 3);
-        }
     }
 }
