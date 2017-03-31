@@ -1,15 +1,31 @@
 fileFormatVersion: 2
-guid: 5747f41b9108ba0498454fdd0fc206c6
-timeCreated: 1490876795
+guid: 0af677bc6df767f41915c71e26b7098a
+timeCreated: 1490949821
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: TestBox
+    100000: B_001
+    100002: B_002
+    100004: B_003
+    100006: B_004
+    100008: B_005
+    100010: B_006
+    100012: B_Root
+    100014: //RootNode
+    100016: HexagonScore
+    400000: B_001
+    400002: B_002
+    400004: B_003
+    400006: B_004
+    400008: B_005
+    400010: B_006
+    400012: B_Root
+    400014: //RootNode
+    400016: HexagonScore
+    4300000: HexagonScore
+    9500000: //RootNode
+    13700000: HexagonScore
   materials:
     importMaterials: 0
     materialName: 0
@@ -72,7 +88,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
