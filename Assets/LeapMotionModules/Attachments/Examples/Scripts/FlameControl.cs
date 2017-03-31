@@ -6,8 +6,14 @@ public class FlameControl : MonoBehaviour {
 
   public void SetTarget (GameObject target) {
         Debug.Log(target.name);
-    CurrentTarget = target;
-  }
+         CurrentTarget = target;
+        if (CurrentTarget.GetComponent<ButtonPress>() != null)
+        {
+            Debug.Log("PRESSED lol");
+
+            CurrentTarget.GetComponent<ButtonPress>().Press();
+        }
+    }
 
   public void LightFire () {
     if (CurrentTarget != null) {

@@ -8,9 +8,10 @@ public class Cequencer : MonoBehaviour
 
     private int Alphabet = 16;
     private int _lettersOnObject = 6;
-    private int _lettersInSequence = 3;
+    public int _lettersInSequence = 4;
     public GameObject Cube;
-    public GameObject DebugSequence;
+    private GameObject DebugSequence;
+    public GameObject LetterPrefab;
     public Material CubeMaterial;
     public List<int> LettersOnBox;
     public List<KeyValuePair<int, int>> LettersInSequence = new List<KeyValuePair<int, int>>();
@@ -20,9 +21,20 @@ public class Cequencer : MonoBehaviour
     private bool _isShowing = true;
     private Material _currentMat;
     private float _speed = 20;
-    void Start()
+
+    public void NextLevel()
     {
-      
+        _lettersInSequence++;
+    }
+    public void Generate()
+
+    {
+        if (DebugSequence)
+        {
+            GameObject.Destroy(DebugSequence);
+            LettersOnBox.Clear();
+            LettersInSequence.Clear();
+        }
         print(Cube);
         for (int i = 0; i < _lettersOnObject; i++)
         {
@@ -58,26 +70,30 @@ public class Cequencer : MonoBehaviour
             print("x " + Mathf.Floor(l / 4) + "   y: " + (l % 4));
 
             child.GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(Mathf.Floor(l / 4) * 0.25f, (l % 4) * 0.25f));
-                counter++;
-            }
-
-            counter = 0;
-        foreach (Transform child in DebugSequence.transform)
-        {
-
-            child.GetComponent<Renderer>().material = CubeMaterial;
-            int l = LettersInSequence[counter].Key;
-            print("x " + Mathf.Floor(l / 4) + "   y: " + (l % 4));
-
-            child.GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(Mathf.Floor(l / 4) * 0.25f, (l % 4) * 0.25f));
             counter++;
         }
+
+        //DebugSequence = new GameObject();
+        //for (int i = 0; i < _lettersInSequence; i++)
+        //{
+        //    var t = Instantiate(LetterPrefab, transform.position + new Vector3(0, 1, -1 + i), Quaternion.Euler(0, 90, 0));
+        //    t.transform.parent = DebugSequence.transform;
+        //    t.GetComponent<Renderer>().material = CubeMaterial;
+        //    int l = LettersInSequence[i].Key;
+        //    print("x " + Mathf.Floor(l / 4) + "   y: " + (l % 4));
+
+        //    t.GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(Mathf.Floor(l / 4) * 0.25f, (l % 4) * 0.25f));
+        //}
         Debug.Log(LettersInSequence[_currentLetter].Value);
 
 
         Renderer renderer = Cube.transform.GetChild(LettersInSequence[_currentLetter].Value).GetComponent<Renderer>();
         _currentMat = renderer.material;
+    }
+    void Start()
+    {
 
+        Generate();
         //StartCoroutine("Show", LettersInSequence[_currentLetter].Value);
     }
 
@@ -97,8 +113,8 @@ public class Cequencer : MonoBehaviour
 
         //    mat.SetColor("_EmissionColor", finalColor);
         //}
+        //>
 
-     
         float emission = _emissive;
         Color baseColor = Color.red;
         //Replace this with whatever you want for your base color at emission level '1'
@@ -118,10 +134,10 @@ public class Cequencer : MonoBehaviour
         else
         {
             _emissive -= Time.deltaTime;
-            
+
             if (_emissive <= 0)
             {
-                print("CurrLetter"+_currentLetter);
+                print("CurrLetter" + _currentLetter);
                 _isShowing = true;
                 Renderer renderer = Cube.transform.GetChild(LettersInSequence[_currentLetter].Value).GetComponent<Renderer>();
                 _currentMat = renderer.material;

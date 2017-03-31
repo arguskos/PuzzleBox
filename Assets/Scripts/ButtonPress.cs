@@ -5,10 +5,9 @@ using UnityEngine;
 public class ButtonPress : MonoBehaviour {
     public bool AutoUnPress = true;
     public bool IsPressed = false;
-    private Vector3 _endPos;
+    public GameObject Origin;
     // Use this for initialization
     void Start() {
-        _endPos = transform.position - transform.up/20 ;
     }
 
     // Update is called once per frame
@@ -22,10 +21,14 @@ public class ButtonPress : MonoBehaviour {
     IEnumerator CorutinePress()
     {
         Vector3 pointA = transform.position;
-        
-        yield return StartCoroutine(MoveObject(transform, pointA, _endPos, 0.2f));
+        var end = Origin.transform.position - Origin.transform.up / 10;
+        yield return StartCoroutine(Down(transform));
+        //yield return StartCoroutine(MoveObject(transform, pointA, end, 0.2f));
+        end = Origin.transform.position - Origin.transform.up / 10;
         if (AutoUnPress)
-            yield return StartCoroutine(MoveObject(transform, _endPos, pointA, 2));
+            yield return StartCoroutine(Up(transform));
+        //if (AutoUnPress)
+        //    yield return StartCoroutine(MoveObject(transform, end, Origin.transform.position, 2));
     }
 
     IEnumerator MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
@@ -36,6 +39,27 @@ public class ButtonPress : MonoBehaviour {
         {
             i += Time.deltaTime * rate;
             thisTransform.position = Vector3.Lerp(startPos, endPos, i);
+            yield return null;
+        }
+    }
+
+    IEnumerator Down(Transform thisTransform)
+    {
+        float i = 0.0f;
+        while (i < 0.2f)
+        {
+            i += Time.deltaTime * 1;
+            thisTransform.position -= thisTransform.up * Time.deltaTime;
+            yield return null;
+        }
+    }
+    IEnumerator Up(Transform thisTransform)
+    {
+        float i = 0.0f;
+        while (i < 0.2f)
+        {
+            i += Time.deltaTime * 1;
+            thisTransform.position += thisTransform.up * Time.deltaTime;
             yield return null;
         }
     }
