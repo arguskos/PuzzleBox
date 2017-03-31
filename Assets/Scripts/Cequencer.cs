@@ -5,8 +5,8 @@ using UnityEngine;
 public class Cequencer : MonoBehaviour
 {
 
-
-    private int Alphabet = 16;
+    //Initialization
+    public int Alphabet = 10;
     private int _lettersOnObject = 6;
     public int _lettersInSequence = 4;
     public GameObject Cube;
@@ -16,16 +16,19 @@ public class Cequencer : MonoBehaviour
     public List<int> LettersOnBox;
     public List<KeyValuePair<int, int>> LettersInSequence = new List<KeyValuePair<int, int>>();
     private int _currentLetter = 0;
-    // Use this for initialization
+
     private float _emissive;
     private bool _isShowing = true;
     private Material _currentMat;
     private float _speed = 20;
 
+    //Go to next level
     public void NextLevel()
     {
         _lettersInSequence++;
     }
+
+    //Generate
     public void Generate()
 
     {
@@ -35,7 +38,9 @@ public class Cequencer : MonoBehaviour
             LettersOnBox.Clear();
             LettersInSequence.Clear();
         }
+
         print(Cube);
+
         for (int i = 0; i < _lettersOnObject; i++)
         {
             int rnd = Random.Range(0, Alphabet);
@@ -45,7 +50,8 @@ public class Cequencer : MonoBehaviour
             }
             LettersOnBox.Add(rnd);
         }
-        for (int i = 0; i < _lettersInSequence; i++)
+
+        for (int i = 0; i <= _lettersInSequence; i++)
         {
             int r = LettersOnBox[Random.Range(0, LettersOnBox.Count)];
             LettersInSequence.Add(new KeyValuePair<int, int>(r, LettersOnBox.IndexOf(r)));
@@ -56,12 +62,16 @@ public class Cequencer : MonoBehaviour
         {
             Debug.Log(LettersOnBox[i]);
         }
+
         print("");
+
         for (int i = 0; i < LettersInSequence.Count; i++)
         {
             Debug.Log(LettersInSequence[i]);
         }
+
         int counter = 0;
+
         foreach (Transform child in Cube.transform)
         {
 
@@ -73,17 +83,18 @@ public class Cequencer : MonoBehaviour
             counter++;
         }
 
-        //DebugSequence = new GameObject();
-        //for (int i = 0; i < _lettersInSequence; i++)
-        //{
-        //    var t = Instantiate(LetterPrefab, transform.position + new Vector3(0, 1, -1 + i), Quaternion.Euler(0, 90, 0));
-        //    t.transform.parent = DebugSequence.transform;
-        //    t.GetComponent<Renderer>().material = CubeMaterial;
-        //    int l = LettersInSequence[i].Key;
-        //    print("x " + Mathf.Floor(l / 4) + "   y: " + (l % 4));
+        DebugSequence = new GameObject();
+        for (int i = 0; i <= _lettersInSequence; i++)
+        {
+            var t = Instantiate(LetterPrefab, transform.position + new Vector3(0, 1, -1 + i), Quaternion.Euler(0, 90, 0));
+            t.transform.parent = DebugSequence.transform;
+            t.GetComponent<Renderer>().material = CubeMaterial;
+            int l = LettersInSequence[i].Key;
+            print("x " + Mathf.Floor(l / 4) + "   y: " + (l % 4));
 
-        //    t.GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(Mathf.Floor(l / 4) * 0.25f, (l % 4) * 0.25f));
-        //}
+            t.GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(Mathf.Floor(l / 4) * 0.25f, (l % 4) * 0.25f));
+        }
+
         Debug.Log(LettersInSequence[_currentLetter].Value);
 
 

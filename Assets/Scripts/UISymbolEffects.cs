@@ -19,40 +19,6 @@ public class UISymbolEffects : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        /*
-        //Activate
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            _isActive = true;
-            _soundManager.GetComponent<SoundManager>().PlaySound("Select");
-        }
-
-        //Deactivate
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            _isActive = false;
-            _soundManager.GetComponent<SoundManager>().PlaySound("Select");
-        }
-
-        //Level Up
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            if (_importanceLevel < 3)
-            {
-                _importanceLevel++;
-            }
-        }
-
-        //Level Down
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            if (_importanceLevel > 1)
-            {
-                _importanceLevel--;
-            }
-        }
-        */
-
         //Set scale according to importanceLevel
         if (_importanceLevel == 3)
         {
@@ -75,7 +41,7 @@ public class UISymbolEffects : MonoBehaviour {
         //Set scale according to isActive
         if (_isActive)
         {
-            _symbolScale *= 1.1f;
+            _symbolScale *= 1.25f;
         }
         else
         {
@@ -83,6 +49,9 @@ public class UISymbolEffects : MonoBehaviour {
         }
 
         //Scale to needed level on update
-        iTween.ScaleTo(gameObject, new Vector3(_symbolScale, _symbolScale, _symbolScale), _defaultDelay);
+        if (this.gameObject.transform.localScale.x != _symbolScale)
+        {
+            iTween.ScaleTo(gameObject, new Vector3(_symbolScale, _symbolScale, _symbolScale), _defaultDelay);
+        }
     }
 }

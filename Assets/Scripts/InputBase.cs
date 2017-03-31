@@ -37,7 +37,7 @@ public class InputBase : MonoBehaviour
             GameObject.Destroy(UserSequence);
         }
         UserSequence = new GameObject();
-        for (int i = 0; i < Cequencer._lettersInSequence; i++)
+        for (int i = 0; i <= Cequencer._lettersInSequence; i++)
         {
             var t = Instantiate(Letter, transform.position + new Vector3(0, 0, -0.24f + i), Quaternion.Euler(0, 90, 0));
             t.AddComponent<UISymbolEffects>();
@@ -65,7 +65,7 @@ public class InputBase : MonoBehaviour
 
         if (_sequence[_currentLetter] < 0)
         {
-            _sequence[_currentLetter] = 16;
+            _sequence[_currentLetter] = Cequencer.Alphabet;
         }
         Debug.Log(_sequence[_currentLetter]);
 
@@ -77,7 +77,7 @@ public class InputBase : MonoBehaviour
     {
         var obj = UserSequence.transform.GetChild(_currentLetter);
         _sequence[_currentLetter] = _sequence[_currentLetter] + 1;
-        _sequence[_currentLetter] %= 16;
+        _sequence[_currentLetter] %= Cequencer.Alphabet;
 
         obj.GetComponent<Renderer>().material = Mat;
 
@@ -144,11 +144,14 @@ public class InputBase : MonoBehaviour
             _soundManager.PlaySound(SoundManager.Sound.Select);
 
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.D))
         {
+            //Decrease current letter
             _currentLetter--;
             if (_currentLetter < 0)
                 _currentLetter = _sequence.Count-1;
+
+            //Make current letter scale relative to others
             var obj = UserSequence.transform.GetChild(_currentLetter);
             obj.GetComponent<UISymbolEffects>()._isActive = true;
             for (int i = 0; i < _sequence.Count; i++)
@@ -162,10 +165,13 @@ public class InputBase : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.A))
         {
+            //Decrease current letter
             _currentLetter++;
             _currentLetter %= _sequence.Count;
+
+            //Make current letter scale relative to others
             var obj = UserSequence.transform.GetChild(_currentLetter);
             obj.GetComponent<UISymbolEffects>()._isActive = true;
             for (int i = 0; i < _sequence.Count; i++)
